@@ -1,0 +1,915 @@
+<!-- {% load static %} -->
+
+<style>
+    .form_conf {
+        text-align: left;
+    }
+    .form_conf form {
+        display: inline-block;
+        margin: 0 10px;
+    }
+</style>
+
+<html>
+    <head>
+        <title>時間割</title>
+        <!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
+    </head>
+    <body>
+        <p>
+            <div class="form_conf">
+                <form action="{% url 'settings' %}">
+                    <input type="submit" value="設定"/>
+                </form>
+                <form action="{% url 'assignments' %}">
+                    <input type="submit" value="課題"/>
+                </form>
+                <h2>メイン</h2>
+            </div>
+        </p>
+        <div style="display:table;margin: 0 auto; width: 90%; height: 80%">
+            <table border="0.5" bgcolor="#A0A0A0" width="100%" height="100%" margin: 0 auto;>
+                <tr bgcolor="D3D3D3" align="center">
+                    <th width={{width.h}}%></th>
+                    <th width={{width.d}}%>月</th>
+                    <th width={{width.d}}%>火</th>
+                    <th width={{width.d}}%>水</th>
+                    <th width={{width.d}}%>木</th>
+                    <th width={{width.d}}%>金</th>
+                    {% if settings.sat %}
+                        <th width={{width.d}}%>土</th>
+                    {% endif %}
+                    {% if settings.sun %}
+                        <th width={{width.d}}%>日</th>
+                    {% endif %}
+                </tr>
+                <tr bgcolor="FFFFFF" align="center">
+                    <td bgcolor="#D3D3D3">
+                        <div>{% if settings.s1 != None %}{{ settings.s1 }}{% endif %}</div>
+                        <div><b>1</b></div>
+                        <div>{% if settings.e1 != None %}{{ settings.e1 }}{% endif %}</div>
+                    </td>
+                    <td bgcolor={{Mon1.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Mon1' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Mon1.name}}</b>
+                        {% if Mon1.url != '' %}
+                            <a href="{{ Mon1.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Mon1.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Tue1.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Tue1' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Tue1.name}}</b>
+                        {% if Tue1.url != '' %}
+                            <a href="{{ Tue1.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Tue1.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Wed1.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Wed1' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Wed1.name}}</b>
+                        {% if Wed1.url != '' %}
+                            <a href="{{ Wed1.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Wed1.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Thu1.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Thu1' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Thu1.name}}</b>
+                        {% if Thu1.url != '' %}
+                            <a href="{{ Thu1.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Thu1.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Fri1.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Fri1' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Fri1.name}}</b>
+                        {% if Fri1.url != '' %}
+                            <a href="{{ Fri1.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Fri1.memo}}
+                        </p>
+                    </td>
+                    {% if settings.sat %}
+                        <td bgcolor={{Sat1.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sat1' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Sat1.name}}</b>
+                            {% if Sat1.url != '' %}
+                                <a href="{{ Sat1.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sat1.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                    {% if settings.sun %}
+                        <td bgcolor={{Sun1.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sun1' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Sun1.name}}</b>
+                            {% if Sun1.url != '' %}
+                                <a href="{{ Sun1.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sun1.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                </tr>
+                <tr bgcolor="FFFFFF" align="center">
+                    <td bgcolor="#D3D3D3">
+                        <div>{% if settings.s2 != None %}{{ settings.s2 }}{% endif %}</div>
+                        <div><b>2</b></div>
+                        <div>{% if settings.e2 != None %}{{ settings.e2 }}{% endif %}</div>
+                    </td>
+                    <td bgcolor={{Mon2.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Mon2' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Mon2.name}}</b>
+                        {% if Mon2.url != '' %}
+                            <a href="{{ Mon2.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Mon2.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Tue2.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Tue2' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Tue2.name}}</b>
+                        {% if Tue2.url != '' %}
+                            <a href="{{ Tue2.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Tue2.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Wed2.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Wed2' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Wed2.name}}</b>
+                        {% if Wed2.url != '' %}
+                            <a href="{{ Wed2.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Wed2.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Thu2.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Thu2' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Thu2.name}}</b>
+                        {% if Thu2.url != '' %}
+                            <a href="{{ Thu2.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Thu2.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Fri2.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Fri2' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Fri2.name}}</b>
+                        {% if Fri2.url != '' %}
+                            <a href="{{ Fri2.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Fri2.memo}}
+                        </p>
+                    </td>
+                    {% if settings.sat %}
+                        <td bgcolor={{Sat2.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sat2' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Sat2.name}}</b>
+                            {% if Sat2.url != '' %}
+                                <a href="{{ Sat2.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sat2.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                    {% if settings.sun %}
+                        <td bgcolor={{Sun2.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sun2' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            <p>
+                                <b>{{Sun2.name}}</b>
+                            {% if Sun2.url != '' %}
+                                <a href="{{ Sun2.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sun2.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                </tr>
+                <tr bgcolor="FFFFFF" align="center">
+                    <td bgcolor="#D3D3D3">
+                        <div>{% if settings.s3 != None %}{{ settings.s3 }}{% endif %}</div>
+                        <div><b>3</b></div>
+                        <div>{% if settings.e3 != None %}{{ settings.e3 }}{% endif %}</div>
+                    </td>
+                    <td bgcolor={{Mon3.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Mon3' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Mon3.name}}</b>
+                        {% if Mon3.url != '' %}
+                            <a href="{{ Mon3.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Mon3.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Tue3.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Tue3' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Tue3.name}}</b>
+                        {% if Tue3.url != '' %}
+                            <a href="{{ Tue3.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Tue3.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Wed3.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Wed3' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Wed3.name}}</b>
+                        {% if Wed3.url != '' %}
+                            <a href="{{ Wed3.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Wed3.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Thu3.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Thu3' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Thu3.name}}</b>
+                        {% if Thu3.url != '' %}
+                            <a href="{{ Thu3.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Thu3.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Fri3.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Fri3' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Fri3.name}}</b>
+                        {% if Fri3.url != '' %}
+                            <a href="{{ Fri3.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Fri3.memo}}
+                        </p>
+                    </td>
+                    {% if settings.sat %}
+                        <td bgcolor={{Sat3.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sat3' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Sat3.name}}</b>
+                            {% if Sat3.url != '' %}
+                                <a href="{{ Sat3.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sat3.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                    {% if settings.sun %}
+                        <td bgcolor={{Sun3.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sun3' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Sun3.name}}</b>
+                            {% if Sun3.url != '' %}
+                                <a href="{{ Sun3.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sun3.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                </tr>
+                <tr bgcolor="FFFFFF" align="center">
+                    <td bgcolor="#D3D3D3">
+                        <div>{% if settings.s4 != None %}{{ settings.s4 }}{% endif %}</div>
+                        <div><b>4</b></div>
+                        <div>{% if settings.e4 != None %}{{ settings.e4 }}{% endif %}</div>
+                    </td>
+                    <td bgcolor={{Mon4.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Mon4' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Mon4.name}}</b>
+                        {% if Mon4.url != '' %}
+                            <a href="{{ Mon4.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Mon4.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Tue4.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Tue4' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Tue4.name}}</b>
+                        {% if Tue4.url != '' %}
+                            <a href="{{ Tue4.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Tue4.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Wed4.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Wed4' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Wed4.name}}</b>
+                        {% if Wed4.url != '' %}
+                            <a href="{{ Wed4.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Wed4.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Thu4.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Thu4' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Thu4.name}}</b>
+                        {% if Thu4.url != '' %}
+                            <a href="{{ Thu4.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Thu4.memo}}
+                        </p>
+                    </td>
+                    <td bgcolor={{Fri4.color}}>
+                        <p>
+                            <form action="{% url 'edit' 'Fri4' %}">
+                                <input type="submit" value="編集"/>
+                            </form>
+                        </p>
+                        <p>
+                            <b>{{Fri4.name}}</b>
+                        {% if Fri4.url != '' %}
+                            <a href="{{ Fri4.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                        {% endif %}
+                        </p>
+                        <p>
+                            {{Fri4.memo}}
+                        </p>
+                    </td>
+                    {% if settings.sat %}
+                        <td bgcolor={{Sat4.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sat4' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Sat4.name}}</b>
+                            {% if Sat4.url != '' %}
+                                <a href="{{ Sat4.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sat4.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                    {% if settings.sun %}
+                        <td bgcolor={{Sun4.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Sun4' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Sun4.name}}</b>
+                            {% if Sun4.url != '' %}
+                                <a href="{{ Sun4.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Sun4.memo}}
+                            </p>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% if settings.period >= 5 %}
+                    <tr bgcolor="FFFFFF" align="center">
+                        <td bgcolor="#D3D3D3">
+                            <div>{% if settings.s5 != None %}{{ settings.s5 }}{% endif %}</div>
+                            <div><b>5</b></div>
+                            <div>{% if settings.e5 != None %}{{ settings.e5 }}{% endif %}</div>
+                        </td>
+                        <td bgcolor={{Mon5.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Mon5' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Mon5.name}}</b>
+                            {% if Mon5.url != '' %}
+                                <a href="{{ Mon5.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Mon5.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Tue5.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Tue5' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Tue5.name}}</b>
+                            {% if Tue5.url != '' %}
+                                <a href="{{ Tue5.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Tue5.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Wed5.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Wed5' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Wed5.name}}</b>
+                            {% if Wed5.url != '' %}
+                                <a href="{{ Wed5.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Wed5.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Thu5.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Thu5' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Thu5.name}}</b>
+                            {% if Thu5.url != '' %}
+                                <a href="{{ Thu5.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Thu5.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Fri5.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Fri5' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Fri5.name}}</b>
+                            {% if Fri5.url != '' %}
+                                <a href="{{ Fri5.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Fri5.memo}}
+                            </p>
+                        </td>
+                        {% if settings.sat %}
+                            <td bgcolor={{Sat5.color}}>
+                                <p>
+                                    <form action="{% url 'edit' 'Sat5' %}">
+                                        <input type="submit" value="編集"/>
+                                    </form>
+                                </p>
+                                <p>
+                                    <b>{{Sat5.name}}</b>
+                                {% if Sat5.url != '' %}
+                                    <a href="{{ Sat5.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                                {% endif %}
+                                </p>
+                                <p>
+                                    {{Sat5.memo}}
+                                </p>
+                            </td>
+                        {% endif %}
+                        {% if settings.sun %}
+                            <td bgcolor={{Sun5.color}}>
+                                <p>
+                                    <form action="{% url 'edit' 'Sun5' %}">
+                                        <input type="submit" value="編集"/>
+                                    </form>
+                                </p>
+                                <p>
+                                    <b>{{Sun5.name}}</b>
+                                {% if Sun5.url != '' %}
+                                    <a href="{{ Sun5.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                                {% endif %}
+                                </p>
+                                <p>
+                                    {{Sun5.memo}}
+                                </p>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
+                {% if settings.period >= 6 %}
+                    <tr bgcolor="FFFFFF" align="center">
+                        <td bgcolor="#D3D3D3">
+                            <div>{% if settings.s6 != None %}{{ settings.s6 }}{% endif %}</div>
+                            <div><b>6</b></div>
+                            <div>{% if settings.e6 != None %}{{ settings.e6 }}{% endif %}</div>
+                        </td>
+                        <td bgcolor={{Mon6.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Mon6' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Mon6.name}}</b>
+                            {% if Mon6.url != '' %}
+                                <a href="{{ Mon6.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Mon6.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Tue6.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Tue6' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Tue6.name}}</b>
+                            {% if Tue6.url != '' %}
+                                <a href="{{ Tue6.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Tue6.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Wed6.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Wed6' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Wed6.name}}</b>
+                            {% if Wed6.url != '' %}
+                                <a href="{{ Wed6.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Wed6.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Thu6.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Thu6' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Thu6.name}}</b>
+                            {% if Thu6.url != '' %}
+                                <a href="{{ Thu6.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Thu6.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Fri6.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Fri6' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Fri6.name}}</b>
+                            {% if Fri6.url != '' %}
+                                <a href="{{ Fri6.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Fri6.memo}}
+                            </p>
+                        </td>
+                        {% if settings.sat %}
+                            <td bgcolor={{Sat6.color}}>
+                                <p>
+                                    <form action="{% url 'edit' 'Sat6' %}">
+                                        <input type="submit" value="編集"/>
+                                    </form>
+                                </p>
+                                <p>
+                                    <b>{{Sat6.name}}</b>
+                                {% if Sat6.url != '' %}
+                                    <a href="{{ Sat6.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                                {% endif %}
+                                </p>
+                                <p>
+                                    {{Sat6.memo}}
+                                </p>
+                            </td>
+                        {% endif %}
+                        {% if settings.sun %}
+                            <td bgcolor={{Sun6.color}}>
+                                <p>
+                                    <form action="{% url 'edit' 'Sun6' %}">
+                                        <input type="submit" value="編集"/>
+                                    </form>
+                                </p>
+                                <p>
+                                    <b>{{Sun6.name}}</b>
+                                {% if Sun6.url != '' %}
+                                    <a href="{{ Sun6.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                                {% endif %}
+                                </p>
+                                <p>
+                                    {{Sun6.memo}}
+                                </p>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
+                {% if settings.period == 7 %}
+                    <tr bgcolor="FFFFFF" align="center">
+                        <td bgcolor="#D3D3D3">
+                            <div>{% if settings.s7 != None %}{{ settings.s7 }}{% endif %}</div>
+                            <div><b>7</b></div>
+                            <div>{% if settings.e7 != None %}{{ settings.e7 }}{% endif %}</div>
+                        </td>
+                        <td bgcolor={{Mon7.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Mon7' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Mon7.name}}</b>
+                            {% if Mon7.url != '' %}
+                                <a href="{{ Mon7.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Mon7.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Tue7.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Tue7' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Tue7.name}}</b>
+                            {% if Tue7.url != '' %}
+                                <a href="{{ Tue7.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Tue7.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Wed7.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Wed7' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Wed7.name}}</b>
+                            {% if Wed7.url != '' %}
+                                <a href="{{ Wed7.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Wed7.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Thu7.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Thu7' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Thu7.name}}</b>
+                            {% if Thu7.url != '' %}
+                                <a href="{{ Thu7.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Thu7.memo}}
+                            </p>
+                        </td>
+                        <td bgcolor={{Fri7.color}}>
+                            <p>
+                                <form action="{% url 'edit' 'Fri7' %}">
+                                    <input type="submit" value="編集"/>
+                                </form>
+                            </p>
+                            <p>
+                                <b>{{Fri7.name}}</b>
+                            {% if Fri7.url != '' %}
+                                <a href="{{ Fri7.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                            {% endif %}
+                            </p>
+                            <p>
+                                {{Fri7.memo}}
+                            </p>
+                        </td>
+                        {% if settings.sat %}
+                            <td bgcolor={{Sat7.color}}>
+                                <p>
+                                    <form action="{% url 'edit' 'Sat7' %}">
+                                        <input type="submit" value="編集"/>
+                                    </form>
+                                </p>
+                                <p>
+                                    <b>{{Sat7.name}}</b>
+                                {% if Sat7.url != '' %}
+                                    <a href="{{ Sat7.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                                {% endif %}
+                                </p>
+                                <p>
+                                    {{Sat7.memo}}
+                                </p>
+                            </td>
+                        {% endif %}
+                        {% if settings.sun %}
+                            <td bgcolor={{Sun7.color}}>
+                                <p>
+                                    <form action="{% url 'edit' 'Sun7' %}">
+                                        <input type="submit" value="編集"/>
+                                    </form>
+                                </p>
+                                <p>
+                                    <b>{{Sun7.name}}</b>
+                                {% if Sun7.url != '' %}
+                                    <a href="{{ Sun7.url }}" target="_blank" rel="noopener noreferrer">リンク</a>
+                                {% endif %}
+                                </p>
+                                <p>
+                                    {{Sun7.memo}}
+                                </p>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
+            </table>
+        </div>
+    </body>
+</html>

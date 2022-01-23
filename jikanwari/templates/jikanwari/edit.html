@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>編集</title>
+    </head>
+    <body>
+        <form action="{% url 'main' %}">
+            <input type="submit" value="メインへ"/>
+        </form>
+        <h2>編集</h2>
+        <table>
+            <form method="post" action="">
+            {% csrf_token %}
+            <tbody>
+              <tr>
+                <th>授業名</th>
+                <td>{{ form.name }}</td>
+              </tr>
+              <tr>
+                <th>URL</th>
+                <td>{{ form.url }}{{form.url.help_text}}</td>
+              </tr>
+              <tr>
+                <th>メモ</th>
+                <td>{{ form.memo }}{{form.memo.help_text}}</td>
+              </tr>
+              <tr>
+                <th>色</th>
+                <td>{{ form.color }}</td>
+              </tr>
+            </tbody>
+              <tr>
+                <td>
+                    <input type="submit" value="保存" name="save">
+                    <input type="reset" value="元に戻す" name="reset">
+                    <input type="submit" value="削除" name="delete">
+                </td>
+              </tr>
+            </form>
+          </table>
+    </body>
+</html>

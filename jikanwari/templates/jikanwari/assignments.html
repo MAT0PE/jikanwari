@@ -1,0 +1,58 @@
+<style>
+    .form_conf {
+        text-align: left;
+    }
+    .form_conf form {
+        display: inline-block;
+        margin: 0 10px;
+    }
+    .cell {
+        padding: 15px;
+        border: 1px solid #ccc
+    }
+    .cell form {
+        display: inline-block;
+        margin: 0 10px;
+    }
+</style>
+
+
+<html>
+    <head>
+        <title>課題</title>
+    </head>
+    <body>
+        <form action="{% url 'main' %}">
+            <input type="submit" value="メイン"/>
+        </form>
+        <h2>課題一覧</h2>
+        {% if check %}
+            <b>未完了の課題はありません</b>
+            <br>
+        {% else %}
+            {% for o in obj %}
+                <div class="cell", style="background-color: {{o.color}}">
+                    {{ o.deadline }}
+                    {{ o.subject }}
+                    {{ o.label }}
+                    {{ o.memo }}
+                    <form action="{% url 'edit_assignment' o.pk %}">
+                        <input type="submit" value="編集"/>
+                    </form>
+                    <form action="{% url 'delete' o.pk %}">
+                        <input type="submit" value="完了"/>
+                    </form>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <br>
+        <div class="form_conf">
+            <form action="{% url 'register_assignment' %}">
+                <input type="submit" value="一つ追加"/>
+            </form>
+            <form action="{% url 'register_assignments' %}">
+                <input type="submit" value="まとめて追加"/>
+            </form>
+        </div>
+    </body>
+</html>

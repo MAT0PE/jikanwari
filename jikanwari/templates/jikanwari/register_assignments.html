@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>課題登録</title>
+    </head>
+    <body>
+        <form action="{% url 'assignments' %}">
+            <input type="submit" value="戻る"/>
+        </form>
+        <h2>課題登録</h2>
+        <table>
+            <form method="post" action="">
+            {% csrf_token %}
+            <tbody>
+                <tr>
+                    <th>授業名</th>
+                    <td>{{ form.subject }}</td>
+                </tr>
+                <tr>
+                    <th>メモ</th>
+                    <td>{{ form.memo }}</td>
+                </tr>
+                <tr>
+                    <th>色</th>
+                    <td>{{ form.color }}</td>
+                </tr>
+                <tr>
+                    <th>種類</th>
+                    <td>{{ form.label }}</td>
+                </tr>
+                <tr>
+                    <th>提出曜日</th>
+                    <td>{{ form.day }}</td>
+                </tr>
+                <tr>
+                    <th>提出時間</th>
+                    <td>{{ form.time }}{{ form.time.help_text }}</td>
+                </tr>
+                <tr>
+                    <th>開始日</th>
+                    <td>{{ form.start }}{{ form.start.help_text }}</td>
+                </tr>
+                <tr>
+                    <th>まとめて登録する課題の数</th>
+                    <td>{{ form.number }}</td>
+                </tr>
+            </tbody>
+              <tr>
+                <td>
+                    <input type="submit" value="保存" name="save">
+                    <input type="reset" value="元に戻す" name="reset">
+                </td>
+              </tr>
+            </form>
+          </table>
+    </body>
+</html>
